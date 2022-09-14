@@ -39,6 +39,8 @@ export async function getStaticProps({ params }) {
 
   return {
     props: { recipe: items[0] }, // return only 1 item instead of array as prop
+    // ISR: update data AT MOST every [value] seconds
+    revalidate: 1,
   }
 }
 
