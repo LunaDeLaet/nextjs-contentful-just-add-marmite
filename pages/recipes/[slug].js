@@ -38,6 +38,18 @@ export async function getStaticProps({ params }) {
     'fields.slug': params.slug,
   })
 
+  // conditional redirect: if slug doesnt exist = if items.length !=1; =0
+  if (!items.length) {
+    return {
+      redirect: {
+        // where to redirect
+        destination: '/',
+        // not permanent redirect, in future this slug could have content
+        permanent: false,
+      },
+    }
+  }
+
   return {
     props: { recipe: items[0] }, // return only 1 item instead of array as prop
     // ISR: update data AT MOST every [value] seconds
