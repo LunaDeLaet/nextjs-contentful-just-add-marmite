@@ -1,5 +1,6 @@
 import { createClient } from "contentful";
 import RecipeCard from "../components/RecipeCard";
+import { useState } from "react";
 
 // connect to contentful space
 export async function getStaticProps() {
@@ -20,12 +21,22 @@ export async function getStaticProps() {
 }
 
 export default function Home({ recipes }) {
-  // click event
-  const handleClick = (e) => {
-    console.log("Button clicked!", e);
+  // let name = "mario";
+  const [name, setName] = useState("mario");
+  const [age, setAge] = useState(25);
+
+  // event handlers
+  // const handleClick = (e) => {
+  //  console.log("Button clicked!", e);
+  // };
+
+  // useState
+  const handleClick = () => {
+    setName("luigi");
+    setAge("30");
   };
 
-  const handleClickAgain = (name, e) => {
+  const handleClickAgain = (e) => {
     console.log("Hello " + name, e.target);
   };
 
@@ -38,6 +49,9 @@ export default function Home({ recipes }) {
       <button onClick={(e) => handleClickAgain("Mario", e)}>
         Click me, too!
       </button>
+      <p>
+        {name} is {age} years old.
+      </p>
 
       <div className="recipe-list">
         {recipes.map((recipe) => (
